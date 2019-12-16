@@ -7,7 +7,7 @@ services:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: ./docker-push.sh
+    script: ./deploy.sh
     on:
       branch: master
       tags: true
