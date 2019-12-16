@@ -1,0 +1,13 @@
+sudo: required
+language: bash
+services:
+  - docker
+
+# Deploy to production
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: ./deploy.sh
+    on:
+      branch: master
+      tags: true
