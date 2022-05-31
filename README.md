@@ -7,3 +7,6 @@ Require with docker-composer:
 sshproxy:
     image: keboola/db-component-ssh-proxy
 ```
+## License
+
+MIT licensed, see [LICENSE](./LICENSE) file.
