@@ -12,9 +12,6 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    outputs:
-      app_image_tag: ${{ steps.tag.outputs.app_image_tag }}
-      is_semantic_tag: ${{ steps.tag.outputs.is_semantic_tag }}
     steps:
       -
         name: Check out the repo
@@ -40,8 +37,8 @@ jobs:
           echo "app_image_tag=$TAG" >> $GITHUB_OUTPUT
       -
         name: Push image to Docker HUB
-        if: startsWith(github.ref, 'refs/tags/') && outputs.is_semantic_tag == 'true'
+        if: startsWith(github.ref, 'refs/tags/') && steps.tag.outputs.is_semantic_tag == 'true'
         run: |
-          docker tag ${{ env.APP_IMAGE}}:latest ${{ env.APP_IMAGE}}:${{ outputs.app_image_tag }}
-          docker push ${{ env.APP_IMAGE}}:${{ outputs.app_image_tag }}
+          docker tag ${{ env.APP_IMAGE}}:latest ${{ env.APP_IMAGE}}:${{ steps.tag.outputs.app_image_tag }}
+          docker push ${{ env.APP_IMAGE}}:${{ steps.tag.outputs.app_image_tag }}
           docker push ${{ env.APP_IMAGE}}:latest
